@@ -1,5 +1,5 @@
 import React from 'react'
-import Backdrop from '../../../../UI/Backdrop/Backdrop'
+import Backdrop from '../../../../../components/UI/Backdrop/Backdrop'
 import classes from './SideLayout.module.sass'
 
 const sideLayout = (props) => (

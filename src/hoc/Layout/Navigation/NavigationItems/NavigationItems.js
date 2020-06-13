@@ -1,5 +1,5 @@
 import React from 'react'
-import Aux from '../../../../hoc/Aux'
+import Aux from '../../../Aux/Aux'
 import classes from'./NavigationItems.module.sass'
 import NavigationItem from './NavigationItem/NavigationItem'
 const navigationItems = (props) => {

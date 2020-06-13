@@ -3,7 +3,7 @@ import BuildIngredientControl from './BuildIngredientControl/BuildIngredientCont
 import CheckoutButton from './CheckoutButton/CheckoutButton'
 import TotalCost from '../TotalCost/TotalCost'
 import classes from './BuildControls.module.sass'
-import Aux from '../../../hoc/Aux'
+import Aux from '../../../hoc/Aux/Aux'
 
 const buildControls = (props) => {
     const ingredients = ['salad', 'cheese', 'meat' ]
