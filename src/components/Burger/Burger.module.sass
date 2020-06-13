@@ -1,16 +1,38 @@
+@mixin responsive-box($height)
+  position: relative
+  &:before
+    content: ''
+    display: block
+    padding-top: $height
+
 .Burger
-    border: 3px solid black
-    height: 200px
-    width: 100%
-    margin: auto
-    overflow: scroll
+    width: 55rem
+    height: 45rem
+    margin-left: auto
+    margin-right: auto
+    margin-top: 3rem
+    overflow: hidden
     text-align: center
     font-weight: bold
     font-size: 1rem
-@media (min-width: 1000px) and (min-height: 700px)
-    .Burger
-      width: 700px
-      height: 600px
+    background: #FFF7E2
+    padding: 1rem 2rem  
+    //display: block
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    font-size: 2rem
+    margin-bottom: 0
+    box-sizing: border-box
+    position: relative
     
+.fill
+    margin-bottom: 0.8rem
+    letter-spacing: 0.1rem
 
-
+@media screen and (max-width: 38rem)
+    //@include responsive-box(80%)
+    .Burger
+        width: 90vw
+        height: 72vw

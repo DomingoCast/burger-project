@@ -1,0 +1,28 @@
+.container
+    height: 100%
+    width: 100%
+    position: absolute
+    top: 0
+    left: 0
+
+.items
+    height: 100%
+    position: relative
+    z-index: 3000
+    left: 4rem
+    display: flex
+    flex-flow: column
+    justify-content: space-evenly
+    //border: 3px solid pink
+    //transition: all 1s
+    animation: derecha 1s .2s 
+    animation-fill-mode: backwards
+
+.secondaryItems
+    display: block
+
+@keyframes derecha
+    0%
+        transform: translateX(-20rem)
+    100%
+        transform: trnslateY(0)

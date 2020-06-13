@@ -1,9 +1,19 @@
 .Backdrop
     position: absolute
-    backdrop-filter: blur(8px)
-    background: rgba(#777, 0.3)
+    backdrop-filter: blur(1px)
+    //background: rgba(white,  0.6)
     height: 100%
     width: 100%
-    border: 3px solid red
     z-index: 200
+    top: 0
+    animation: fade 1s 
+    animation-fill-mode: backwards
+
+
+@keyframes fade
+    0%
+        opacity: 0
+    100%
+        opacity: 100%
+
 

@@ -1,0 +1,18 @@
+<svg width="664" height="481" viewBox="0 0 664 481" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="664" height="481" fill="#E5E5E5"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="-174" y="359" width="985" height="122">
+<rect width="985" height="122" transform="matrix(1 0 0 -1 -174 481)" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0)">
+<path d="M633 359C633 291.621 498.685 237 333 237C167.315 237 33 291.621 33 359C33 481 167.315 481 333 481C498.685 481 633 481 633 359Z" fill="#CC8943"/>
+</g>
+<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="-174" y="0" width="985" height="179">
+<rect x="-174" width="985" height="179" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask1)">
+<ellipse cx="333" cy="179" rx="300" ry="179" fill="#CC8943"/>
+</g>
+<rect y="281" width="664" height="61" fill="#954425"/>
+<rect y="196" width="664" height="27" fill="#98B923"/>
+<rect y="240" width="664" height="22" fill="#FCCC4F"/>
+</svg>

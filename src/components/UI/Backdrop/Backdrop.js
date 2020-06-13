@@ -1,10 +1,13 @@
 import React from 'react'
 import classes from './Backdrop.module.sass'
 const backdrop = (props) => {
-    console.log('display', props.display)
     let style
     if(props.display){
-        style = {display: 'block'}
+        style = {display: 'block',
+            //background: props.color,
+            background: props.color,
+        }
+
     }else{
         style = {display: 'none'}
     }

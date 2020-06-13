@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal'
 import Backdrop from '../../components/UI/Backdrop/Backdrop'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import CheckoutText from '../../components/Burger/CheckoutText/CheckoutText'
+import classes from './BurgerBuilder.module.sass'
 
 class BurgerBuilder extends Component{
     state = {
@@ -33,7 +34,7 @@ class BurgerBuilder extends Component{
         //console.log(Object.keys(this.state.ingredients))
         for(let ingredientName of Object.keys(this.state.ingredients)){
             const text = e.target.innerHTML
-            if (e.target.parentNode.className === ingredientName){
+            if (e.target.parentNode.parentNode.className === ingredientName){
                 this.setState((prevState, props) => {
                     const newIngredients = {...prevState.ingredients}
                     const newEnabler = {...prevState.buttonEnabler}
@@ -48,7 +49,7 @@ class BurgerBuilder extends Component{
                         if(newIngredients[ingredientName]>0){
                             newIngredients[ingredientName]--
                             newTCost -= prevState.prices[ingredientName]
-                            if(newIngredients[ingredientName]===0){
+                            if(newIngredients[ingredientName] === 0){
                                 newEnabler[ingredientName] = false
                                 if(newTCost === 0){ //El nuevo coste calculado
                                     newCheckout = true 
@@ -77,14 +78,12 @@ class BurgerBuilder extends Component{
     modalOut = () => {
         this.setState({
             displayCheckout: false,
-            checkout: true, //si se puede comprar pero queremos desabilitar el boton
         })
     }
     render(){
         //console.log(this.state.ingredients)
-        console.log('display1', this.state.displayCheckout)
         return(
-            <Aux>
+            <div className={classes.bigContainer}>
                 <Modal display={this.state.displayCheckout}>
                     <CheckoutText 
                     ingredients={{...this.state.ingredients}}
@@ -92,13 +91,17 @@ class BurgerBuilder extends Component{
                     tCost={this.state.totalCost}
                     />
                 </Modal>
-                <Backdrop click={this.modalOut}display={this.state.displayCheckout}/> 
-                <Burger ingredients = {this.state.ingredients}/>
+                <Backdrop click={this.modalOut} display={this.state.displayCheckout} color={'rgba(255,255,255,0.6)'}/> 
+                <Burger className={classes.BurgerContainer} ingredients = {this.state.ingredients}/>
                 <BuildControls 
+                className={classes.BuildControls}
                 checkCheckout = {this.checkItOut}
-                checkout={this.state.checkout} enabler={this.state.buttonEnabler}click= {this.clicked}/>
-                <TotalCost value={this.state.totalCost}/>
-            </Aux>
+                checkout={this.state.checkout} enabler={this.state.buttonEnabler}click= {this.clicked}
+                tCost= {this.state.totalCost}
+                />
+
+
+            </div>
         )
 
     }

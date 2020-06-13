@@ -1,11 +1,18 @@
 .Modal
     position: Absolute
     background: white
-    border: 3px solid pink
     margin-left: 50%
     margin-right: 50%
-    height: 15rem
-    width: 20rem
+    height: 35rem
+    width: 40rem
+    background: #E8F6CA
 
     transform: translate(-50%, 50%)
     z-index: 300
+
+@media screen and (max-width: 30rem)
+    .Modal
+        width: 90vw
+        height: auto
+        padding-bottom: 2rem
+        top: 7%

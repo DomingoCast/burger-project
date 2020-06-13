@@ -1,0 +1,63 @@
+@mixin responsive-box($height)
+  position: relative
+  &:before
+    content: ''
+    display: block
+    padding-top: $height
+
+$width-bread: 90%
+$width-ingredients: 100%
+$color-bread: #CC8943
+$bottom-margin: $width-bread*0.028
+
+.Fill
+    margin-bottom: $bottom-margin
+    
+.BreadTop
+    @include responsive-box(30%)
+    position: relative
+    width: $width-bread
+    ////height: $width-bread*0.3
+    //border-radi
+    border-radius: 50% / 100%
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    //border-top-right-radius: $width-bread
+    //border-top-left-radius: $width-bread
+    background: $color-bread
+    margin-bottom: $bottom-margin
+    display: inline-block
+
+.BreadBottom
+    @include responsive-box(20%)
+    display: inline-block
+    //position: relative
+    width: $width-bread
+    //height: $width-bread*0.2
+    border-radius: 25% / 100%
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    //transform: matrix(1, 0, 0, -1, 0, 0)
+    //clip-path: ellipse(40% 41% at 50% 50%)
+    background: $color-bread
+
+.Cheese
+    @include responsive-box(3%)
+    width: $width-ingredients
+    //height: 0.03 * $width-ingredients
+    background: #FCCC4F
+    margin-bottom: $bottom-margin
+    
+.Salad
+    @include responsive-box(4%)
+    width: $width-ingredients
+    //height: 0.04 * $width-ingredients
+    background: #98B923
+    margin-bottom: $bottom-margin
+
+.Meat
+    @include responsive-box(7%)
+    width: $width-ingredients
+    //height: 0.07 * $width-ingredients
+    background: #954425
+    margin-bottom: $bottom-margin

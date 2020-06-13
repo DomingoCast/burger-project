@@ -1,0 +1,72 @@
+.button
+    display: inline-block
+    margin: 1rem
+    &:link, &:visited
+        color: black
+        text-decoration: none
+    vertical-align: middle
+    position: relative
+    
+.text
+    position: relative
+    z-index: 30
+    color: white
+    font-weight: 500
+    font-size: 3rem
+
+.block
+    width: 80%
+    height: 80%
+    background: #aaa
+    position: absolute
+    vertical-align: middle
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    z-index: 2
+
+.double
+    margin: 0
+    margin-top: -1rem
+    .text
+        font-size: 2.5rem
+
+.mobile
+    //border: 3px solid pink
+    padding-top: 1rem
+    padding-left: 1.3rem
+    overflow: hidden
+    .button
+        display: block
+        margin-bottom: 9rem
+        //padding-left: 12vw
+        //padding-top: 1rem
+        //padding-bottom: 1rem
+        //overflow: hidden
+        
+    .block
+        left: 12vw
+        width: 36vw
+        height: 200%
+    .text
+        display: inline-block
+        font-weight: 400
+        font-size: 3.5rem
+        letter-spacing: 1rem
+        box-decoration-break: hide
+        animation: derecha-texto 1s .4s
+        animation-fill-mode: backwards
+    .double
+        .text
+            font-size: 3.5rem
+    .secondWord
+        display: none
+        
+@keyframes derecha-texto
+    0%
+        transform: translateX(-20rem)
+    100%
+        transform: translateX(0rem)
+
+
+

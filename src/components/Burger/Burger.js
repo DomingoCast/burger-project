@@ -20,7 +20,7 @@ const burger = (props) => {
         }
     }
     if(ingredientList.length === 0){
-        ingredientList = 'Fill your burger'
+        ingredientList = <div className={classes.fill}>Fill your burger</div>
     }
     return(
         <div className={classes.Burger}>

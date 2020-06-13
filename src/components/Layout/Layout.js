@@ -1,16 +1,49 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Aux from '../../hoc/Aux'
 import classes from './Layout.module.sass'
+import Toolbar from './Navigation/Toolbar/Toolbar'
+import Sidebar from './Navigation/Sidebar/Sidebar'
+
 
 const style = {
 }
 //console.log(classes)
-const layout = props => (
-    <Aux>
-        <div>Toolbar, sidedrawer, Backdrop</div>
-        <main style={style}className={classes.content}>{props.children}</main>
+class Layout extends Component{ 
+    state = {
+        mobile: false,
+        displaySB: false,
+    }
+    hideSB = ()=>{
+        console.log('wasap')
+        this.setState({displaySB: false})
+    }
+    showSB = () => {
+        this.setState({displaySB: true})
+    }
+    clickMenu = () => {
+        console.log('smt')
+        if(this.state.displaySB){
+            this.hideSB()
+        }else{
+            this.showSB()
+        }        
+    }
+    hola= () => {console.log('nice')}
+    render(){
+        return(
+            <Aux>
+                <Toolbar
+                clickMenu={this.clickMenu}
+                />
+                <Sidebar clickMenu={this.clickMenu} Back={this.hola} display={this.state.displaySB}/>
+                <main style={style} 
+                className={classes.content}>
+                {this.props.children}
+                </main>
 
-    </Aux>
-)
+            </Aux>
+        )
+    }
+}
 
-export default layout
+export default Layout
