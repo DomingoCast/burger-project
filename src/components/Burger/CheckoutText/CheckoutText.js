@@ -21,7 +21,7 @@ const checkoutText = (props) => {
             </div>
             <div className={classes.controls}>
                 <span className={classes.price}>T.price: ${props.tCost}</span>
-                <a href="#" className={classes.buy}>Buy</a>
+                <a href="#" onClick={props.buy} className={classes.buy}>Buy</a>
             </div>
         </div>
     )

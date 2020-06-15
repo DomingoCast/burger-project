@@ -11,7 +11,6 @@ const backdrop = (props) => {
     }else{
         style = {display: 'none'}
     }
-    console.log('estilaso', style)
     return(
     <div style={style} onClick={props.click} className={classes.Backdrop}></div>
 )}

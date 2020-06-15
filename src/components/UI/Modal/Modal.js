@@ -4,7 +4,7 @@ import classes from './Modal.module.sass'
 const modal = React.memo((props) => {
     let style
     if(props.display){
-        style = {display: 'block'}
+        style = {display: 'flex'}
     }else{
         style = {display: 'none'}
     }

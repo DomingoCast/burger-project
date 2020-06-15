@@ -4,17 +4,15 @@ import Burger from '../../components/Burger/Burger'
 import TotalCost from '../../components/Burger/TotalCost/TotalCost'
 import Modal from '../../components/UI/Modal/Modal'
 import Backdrop from '../../components/UI/Backdrop/Backdrop'
+import Loading from '../../components/UI/Loading/Loading'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import CheckoutText from '../../components/Burger/CheckoutText/CheckoutText'
 import classes from './BurgerBuilder.module.sass'
-
+import axios from '../../axios-orders'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 class BurgerBuilder extends Component{
     state = {
-        ingredients: {
-            salad:0,
-            cheese:0,
-            meat:0,
-        },
+        ingredients: null,
         prices: {
             salad: 0.5,
             cheese: 0.7,
@@ -28,7 +26,20 @@ class BurgerBuilder extends Component{
         totalCost: 0,
         checkout: true,
         displayCheckout: false,
+        loading: false,
     }
+    componentDidMount(){
+        axios.get('/ingredients.json')
+            .then(response => this.setState({ingredients: response.data, loading: false}))
+            .catch(error => {
+                this.setState({
+                    loading: false
+                })
+                
+                console.log(error)
+            })
+    }
+
     clicked = (e) => {
         //console.log('hola', e.target.parentNode.className)
         //console.log(Object.keys(this.state.ingredients))
@@ -80,26 +91,72 @@ class BurgerBuilder extends Component{
             displayCheckout: false,
         })
     }
+    handleBuy = () => {
+        this.setState({
+            loading: true
+        })
+        const data = {
+            ingredients: this.state.ingredients,
+            customer : {
+                name: 'federico',
+                email: 'federico@camela.es',
+                phone: '69696969696420',
+            },
+            order: 'fast',
+        }
+        axios.post('/orders.json', data) 
+            .then(()=>{
+                this.setState({loading: false})
+                this.modalOut()})
+            .catch(error => {
+                this.setState({loading: false})
+                this.modalOut()
+                console.log(error)
+
+            })               
+
+            
+    }
+    modalInsides = () => {
+
+        if(this.state.loading){
+            return <Loading/>
+        }else{
+                return(<CheckoutText 
+            buy={this.handleBuy}
+            ingredients={{...this.state.ingredients}}
+            price={{...this.state.prices}}
+            tCost={this.state.totalCost}
+            />)
+        }
+    }
+    burgerWhileLoading = () => {
+        if(this.state.ingredients){
+            return(
+                <Aux>
+                    <Burger className={classes.BurgerContainer} ingredients = {this.state.ingredients}/>
+                    <BuildControls 
+                    className={classes.BuildControls}
+                    checkCheckout = {this.checkItOut}
+                    checkout={this.state.checkout} enabler={this.state.buttonEnabler}click= {this.clicked}
+                    tCost= {this.state.totalCost}
+                    />
+                </Aux>
+            )
+        }else{
+            return <Modal display={true}><Loading/></Modal>
+        }
+    }
     render(){
         //console.log(this.state.ingredients)
         return(
             <div className={classes.bigContainer}>
                 <Modal display={this.state.displayCheckout}>
-                    <CheckoutText 
-                    ingredients={{...this.state.ingredients}}
-                    price={{...this.state.prices}}
-                    tCost={this.state.totalCost}
-                    />
+                    {this.modalInsides()}
                 </Modal>
                 <Backdrop click={this.modalOut} display={this.state.displayCheckout} color={'rgba(255,255,255,0.6)'}/> 
-                <Burger className={classes.BurgerContainer} ingredients = {this.state.ingredients}/>
-                <BuildControls 
-                className={classes.BuildControls}
-                checkCheckout = {this.checkItOut}
-                checkout={this.state.checkout} enabler={this.state.buttonEnabler}click= {this.clicked}
-                tCost= {this.state.totalCost}
-                />
 
+                {this.burgerWhileLoading()}
 
             </div>
         )
@@ -108,4 +165,4 @@ class BurgerBuilder extends Component{
 
 }
 
-export default BurgerBuilder
+export default withErrorHandler(BurgerBuilder, axios)
