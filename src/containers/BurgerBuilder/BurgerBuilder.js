@@ -10,7 +10,9 @@ import CheckoutText from '../../components/Burger/CheckoutText/CheckoutText'
 import classes from './BurgerBuilder.module.sass'
 import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import {withRouter, Redirect} from 'react-router-dom'
 class BurgerBuilder extends Component{
+_isMounted = false
     state = {
         ingredients: null,
         prices: {
@@ -27,17 +29,29 @@ class BurgerBuilder extends Component{
         checkout: true,
         displayCheckout: false,
         loading: false,
+        error: false,
     }
     componentDidMount(){
+        this._isMounted = true
         axios.get('/ingredients.json')
-            .then(response => this.setState({ingredients: response.data, loading: false}))
+            .then(response => this._isMounted?this.setState({
+                ingredients: response.data,
+                loading: false
+            }):null)
             .catch(error => {
-                this.setState({
-                    loading: false
-                })
+                if(this._isMounted){
+                    this.setState({
+                        loading: false,
+                        error: true,
+                    })
+                }
                 
                 console.log(error)
             })
+    }
+    componentWillUnmount(){
+        this._isMounted = false
+
     }
 
     clicked = (e) => {
@@ -102,18 +116,31 @@ class BurgerBuilder extends Component{
                 email: 'federico@camela.es',
                 phone: '69696969696420',
             },
-            order: 'fast',
+            order: {
+                delivery: 'fast',
+                price: this.state.totalCost
+                
+            }
         }
+        let redirect
         axios.post('/orders.json', data) 
             .then(()=>{
-                this.setState({loading: false})
-                this.modalOut()})
-            .catch(error => {
-                this.setState({loading: false})
-                this.modalOut()
-                console.log(error)
+                if (this._isMounted){
+                    this.setState({loading: false})
+                    this.modalOut()
+                    this.props.history.push('/checkout')
 
-            })               
+                }
+
+            })
+            .catch(error => {
+                if (this._isMounted){
+                    this.setState({loading: false})
+                    this.modalOut()
+                    console.log(error)
+                    
+
+            }})               
 
             
     }
@@ -149,6 +176,7 @@ class BurgerBuilder extends Component{
     }
     render(){
         //console.log(this.state.ingredients)
+        console.log('burgerBuilder', this.props)
         return(
             <div className={classes.bigContainer}>
                 <Modal display={this.state.displayCheckout}>

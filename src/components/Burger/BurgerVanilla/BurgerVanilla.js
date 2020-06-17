@@ -1,7 +1,7 @@
+
 import React from 'react'
-import BurgerIngredients from './BurgerIngredients/BurgerIngredients'
-import classes from './Burger.module.sass'
-import sortIngredients from './sortIngredients'
+import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
+import sortIngredients from '../sortIngredients'
 //import Aux from '../../hoc/Aux'
 
 //const style = {
@@ -12,8 +12,8 @@ import sortIngredients from './sortIngredients'
 
 
 const burger = (props) => {
-    const ingredients = sortIngredients(props.ingredients)
     let ingredientList = []
+    const ingredients = sortIngredients(props.ingredients)
     for (let [ingredient, times] of Object.entries(ingredients)) {
         for (let i = 0; i<times; i++){
             ingredientList.push(
@@ -21,15 +21,15 @@ const burger = (props) => {
             )
         }
     }
-    if(ingredientList.length === 0){
-        ingredientList = <div className={classes.fill}>Fill your burger</div>
-    }
+    //if(ingredientList.length === 0){
+        //ingredientList = <div className={classes.fill}>Fill your burger</div>
+    //}
     return(
-        <div className={classes.Burger}>
+        <>
             <BurgerIngredients type='bread-top'/>
-            {ingredientList}
+                {ingredientList}
             <BurgerIngredients type='bread-bottom'/>
-        </div>
+        </>
     )
     
 }

@@ -11,8 +11,8 @@ const navigationItems = (props) => {
             <NavigationItem click={props.clickMenu} mobile={props.mobile} url='#'>Menu</NavigationItem>
         </div>
         <div className={props.secClass}>   
-            <NavigationItem secondWord={true} mobile={props.mobile} url='#'>Burger Builder</NavigationItem>
-            <NavigationItem mobile={props.mobile} url='#'>Check out</NavigationItem>
+            <NavigationItem secondWord={true} mobile={props.mobile} url='/burger'>Burger Builder</NavigationItem>
+            <NavigationItem mobile={props.mobile} url='/checkout'>Check out</NavigationItem>
         </div>
     </Aux>
 )

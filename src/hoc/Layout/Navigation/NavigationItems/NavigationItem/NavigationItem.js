@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './NavigationItem.module.sass'
-
+import {Link} from 'react-router-dom'
 const navigationItem = (props) => {
 
     let item
@@ -23,10 +23,10 @@ const navigationItem = (props) => {
     }
     return(
         <div className={lclass}>
-            <a onClick={props.click}href={props.url} className={classes.button}>
+            <Link onClick={props.click} to={props.url} className={classes.button}>
                 <div className={classes.block}></div>
                 {item}
-            </a>
+            </Link>
         </div>
     )
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Aux from '../Aux/Aux'
 import Modal from '../../components/UI/Modal/Modal'
 
 const withErrorHandler = (WrappedComponent, axios) => {
@@ -18,18 +17,21 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 })
         }
         componentWillUnmount(){
-            axios.interceptor.request.eject(this.reqIterceptor)
-            axios.interceptor.response.eject(this.resIterceptor)
+            axios.interceptors.request.eject(this.reqIterceptor)
+            axios.interceptors.response.eject(this.resIterceptor)
+        }
+        errorConfirmedHandler = () => {
+            this.setState({error: null})
         }
         render(){
             return(
-                <Aux>
+                <>
                     <Modal display={this.state.error}>
                         {this.state.error?this.state.error.message:null}
                     </Modal>
 
-                    <WrappedComponent/>
-                </Aux>
+                    <WrappedComponent {...this.props}/>
+                </>
             )
         }
     }
