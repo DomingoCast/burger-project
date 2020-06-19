@@ -12,7 +12,9 @@ const checkoutOrder = (props) =>{
                     Burgers <span className={classes.x}>x</span>{props.quantity}
                 </div>
                 <div className={classes.buttons}>
-                    <PairButtons url1="#" url2="#" btn1="add" btn2="continue"/>
+                    <PairButtons url1="#" btn1="add" click1={props.add}
+                                 url2="#" btn2="continue" click2={props.continue}
+                    />
                 </div>
             </div>
                 <div className={classes.price}>

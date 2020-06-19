@@ -27,7 +27,9 @@ const checkoutOrder = (props) =>{
                     {ingredients}
                 </div>
                 <div className={classes.buttons}>
-                    <PairButtons url1="#" url2="#" btn1="edit" btn2="remove"/>
+                    <PairButtons url1="#"  btn1="edit"   click1={props.edit}
+                                 url2="#"  btn2="remove" click2={props.delete}
+                    />
                 </div>
             </div>
                 <div className={classes.price}>

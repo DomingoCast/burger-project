@@ -1,0 +1,133 @@
+.inputContainer
+    font-size: 3rem
+    display: flex
+    justify-content: space-between
+    width: 100%
+    margin-bottom: 2rem
+    letter-spacing: .5rem
+    color: #5E5E5E
+
+.inputBox
+    width: 100%
+
+    //background: red
+    position: relative
+    padding: 0 0rem
+    z-index: 10000
+    //background: white
+    display: flex
+    //justify-content: center
+    justify-content: space-between
+    align-items: center
+
+
+
+.adressContainer
+    width: 80%
+    display: flex
+    height: 100%
+    justify-content: space-between
+    & ~ .label
+        letter-spacing: .2rem
+    //.input
+        //width: 50%
+
+.input
+    border: none
+    height: 100%
+    width: 80%
+    padding: 0 1rem
+    box-sizing: border-box
+    font-size: 1.6rem
+    color: inherit
+    letter-spacing: .1rem
+    &:focus
+        outline: none
+    &:focus ~ .inputBack
+        opacity: 1
+        background: #98B923
+
+    &:focus ~ .label
+        font-weight: 500
+        color: #E8F6CA
+    &:focus ~ .label .label__background
+        opacity: 1
+        background: #98B923
+
+    //&:focus:invalid ~ .inputBack
+        //opacity: 1
+        //background: #FFC0A8
+    //&:focus:invalid ~ .label .label__background
+        //opacity: 1
+        //background: #FFC0A8
+
+.focusedAdress
+    .inputBack
+        opacity: 1
+        background: #98B923
+    .label
+        font-weight: 500
+        color: #E8F6CA
+    .label__background
+        opacity: 1
+        background: #98B923
+    .zip
+        width: 29.5%
+        border: 0
+    .adress
+        width: 69.5%
+
+.invalid
+    .inputBack
+        opacity: 1
+        background: #FFC0A8
+    .label__background
+        opacity: 1
+        background: #FFC0A8
+    .label
+        font-weight: 500
+        color: #E8F6CA
+    
+
+.zip
+    box-sizing: border-box
+    border-left: 1px solid #E5E5E5
+    //border: 3px solid blue
+    width: 30%
+    transition: width .2s
+    transition: border .0 .2s
+    &::placeholder
+        text-align: center
+        letter-spacing: 1rem
+        color: #E5E5E5
+        font-size: 2rem
+        //font-weight: 500
+.adress
+    transition: all .2s
+    width: 70%
+
+
+.inputBack
+    z-index: -1
+    display: block
+    position: absolute
+    top: .7rem
+    left: .7rem
+    width: 80%
+    height: 100%
+    opacity: 0
+
+
+        
+.label        
+    position: relative
+    display: block
+    &__background
+        position: absolute
+        height: 120%
+        width: 110%
+        top: 0
+        z-index: -1
+        left: 0.3rem
+        opacity: 0
+

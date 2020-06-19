@@ -11,10 +11,15 @@ import classes from './BurgerBuilder.module.sass'
 import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import {withRouter, Redirect} from 'react-router-dom'
+
+import { connect, dispatch } from 'react-redux'
+import * as types from '../../store/types'
+
 class BurgerBuilder extends Component{
 _isMounted = false
     state = {
         ingredients: null,
+        totalCost: 0,
         prices: {
             salad: 0.5,
             cheese: 0.7,
@@ -25,32 +30,57 @@ _isMounted = false
             cheese: false,
             meat: false,
         },
-        totalCost: 0,
         checkout: true,
         displayCheckout: false,
         loading: false,
         error: false,
+        cleanState:{
+            ingredients: {
+                salad: 0,
+                cheese: 0,
+                meat: 0
+            },
+            prices: {
+                salad: 0.5,
+                cheese: 0.7,
+                meat: 1,
+            },
+            buttonEnabler:{
+                salad: false,
+                cheese: false,
+                meat: false,
+            },
+            totalCost: 0,
+            checkout: true,
+            displayCheckout: false,
+            loading: false,
+            error: false,
+
+        }
     }
     componentDidMount(){
         this._isMounted = true
-        axios.get('/ingredients.json')
-            .then(response => this._isMounted?this.setState({
-                ingredients: response.data,
-                loading: false
-            }):null)
-            .catch(error => {
-                if(this._isMounted){
-                    this.setState({
-                        loading: false,
-                        error: true,
-                    })
-                }
+        //axios.get('/ingredients.json')
+            //.then(response => this._isMounted?this.setState({
+                //ingredients: response.data[Object.keys(response.data)[0]],
+                //loading: false
+            //}):null)
+            //.catch(error => {
+                //if(this._isMounted){
+                    //this.setState({
+                        //loading: false,
+                        //error: true,
+                    //})
+                //}
                 
-                console.log(error)
-            })
+                //console.log(error)
+            //})
+        this.setState(this.props.updateBurger)
     }
     componentWillUnmount(){
+        //console.log('hola?')
         this._isMounted = false
+        this.props.setClean()
 
     }
 
@@ -105,7 +135,7 @@ _isMounted = false
             displayCheckout: false,
         })
     }
-    handleBuy = () => {
+    handleBuy = (cRed) => {
         this.setState({
             loading: true
         })
@@ -122,14 +152,16 @@ _isMounted = false
                 
             }
         }
-        let redirect
+        let redirect = () => this.setState(this.state.cleanState)
+        if (cRed){
+            redirect = () => this.props.history.push('/checkout')
+        }
         axios.post('/orders.json', data) 
             .then(()=>{
                 if (this._isMounted){
                     this.setState({loading: false})
                     this.modalOut()
-                    this.props.history.push('/checkout')
-
+                    redirect()
                 }
 
             })
@@ -149,12 +181,15 @@ _isMounted = false
         if(this.state.loading){
             return <Loading/>
         }else{
-                return(<CheckoutText 
-            buy={this.handleBuy}
-            ingredients={{...this.state.ingredients}}
-            price={{...this.state.prices}}
-            tCost={this.state.totalCost}
-            />)
+            return(
+                <CheckoutText 
+                    buy={() => this.handleBuy(true)}
+                    cart={() => this.handleBuy(false)}
+                    ingredients={{...this.state.ingredients}}
+                    price={{...this.state.prices}}
+                    tCost={this.state.totalCost}
+                />
+            )
         }
     }
     burgerWhileLoading = () => {
@@ -176,7 +211,6 @@ _isMounted = false
     }
     render(){
         //console.log(this.state.ingredients)
-        console.log('burgerBuilder', this.props)
         return(
             <div className={classes.bigContainer}>
                 <Modal display={this.state.displayCheckout}>
@@ -192,5 +226,16 @@ _isMounted = false
     }
 
 }
+const mapState = (state) => {
+    return {
+        updateBurger: state.burgerState
+    }
+}
 
-export default withErrorHandler(BurgerBuilder, axios)
+const mapActions = (dispatch) => {
+    return{
+        setClean: () => dispatch({type: types.SET_CLEAN})
+    }
+}
+
+export default withErrorHandler(connect(mapState, mapActions)(BurgerBuilder), axios)

@@ -21,7 +21,10 @@ const checkoutText = (props) => {
             </div>
             <div className={classes.controls}>
                 <span className={classes.price}>T.price: ${props.tCost}</span>
-                <a href="#" onClick={props.buy} className={classes.buy}>Buy</a>
+                <div className={classes.buttons}>
+                    <a href="#" onClick={props.cart} className={classes.cart}>+cart</a>
+                    <a href="#" onClick={props.buy} className={classes.buy}><div className={classes.buy__arrow}>&rarr;</div></a>
+                </div>
             </div>
         </div>
     )
