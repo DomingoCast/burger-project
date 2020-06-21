@@ -3,20 +3,40 @@
     //flex-flow: column
     //align-items: center
     margin-top: 2rem
-    height: 63vh
+    //height: 63vh
     overflow: scroll
     &::-webkit-scrollbar
         display: none
+    //--whole-vh: calc(--vh, 1vh)
+    height: calc((var(--vh) * 100) - var(--TC-height) - var(--toolbar-height))
+    //height: calc(var(--vh))
+    //height: calc(100rem - 50rem)
+    //height: -moz-calc(50% - 50rem)
+    //height: -webkit-calc(50% - 50rem)
+    //position: relative
+    box-sizing: border-box
+
+
+
+.scrollTop
+    border-bottom: 3px solid #C4C4C4
+.scrollBottom
+    border-top: 3px solid #C4C4C4
+.scrollMiddle
+    border-top: 3px solid #C4C4C4
+    border-bottom: 3px solid #C4C4C4
+
+
 
 
 @media screen and (max-width: 70em)
   .orders
-      height: 72vh
+      //height: 72vh
 @media screen and (max-width: 45em)
   .orders
 @media screen and (max-width: 37em)
   .orders
 @media screen and (max-width: 27em)
   .orders
-      height: 74vh
+      //height: 74vh
 

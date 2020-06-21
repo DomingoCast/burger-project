@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 const pairButtons = (props) => {
     let btn1
     let btn2
-    console.log(props)
     
     switch(props.btn1){
         case 'add':

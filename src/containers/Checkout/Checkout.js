@@ -14,6 +14,10 @@ class Checkout extends Component{
         scroll: null
     }
 
+    componentWillMount(){
+        this._isMounted = false
+    }
+
     componentDidMount(){
         this._isMounted = true
         axios.get('/orders.json')
@@ -24,12 +28,14 @@ class Checkout extends Component{
             .catch(error => console.log('error', error))
         
         const elements = document.querySelector('#elements')
+        this.handleScroll() //check overflow of element once it is mounted
+
+    }
+    componentDidUpdate(){
+        this.handleScroll() //check overflow of element when delete
 
     }
 
-    componentWillMount(){
-        this._isMounted = false
-    }
 
     printOrders = () => {
         let orders
@@ -46,14 +52,12 @@ class Checkout extends Component{
     }
 
     handleEdit = (order, orderID) => { //Cambiar cuando redux porque esto e:s una locura
-        console.log(order)
         this.props.setCurrent(order.ingredients, order.order.price)
         this.handleDelete(orderID)
         this.props.history.push('/burger')
         
     }
     handleDelete = (orderID) => {
-        console.log('orderID', orderID)
         axios.delete(`/orders/${orderID}.json`)
             .then(() => {
                 this.setState(prevState => {
@@ -67,17 +71,27 @@ class Checkout extends Component{
     handleAdd = () => this.props.history.push('/burger')
     handleContinue = () => this.props.history.push('/form')
     
-    handleScroll = (element) => {
-        //let scrollClass
-        //if (element.scrollHeight === element.clientHeight){
-            //return null
-        //}else if(element.scrollTop === 0){
-            //return classes.scrollTop
-        //}else if(element.scrollHeight - element.scrollTop === element.clientHeight){
-            //return classes.scrollBottom
-        //}else{
-            //return classes.scrollMiddle
-        //}
+    handleScroll = () => {
+        const element = document.querySelector('#orderList')
+        let scrollClass
+        //console.log('[heights]', element.scrollHeight - element.scrollTop, element.clientHeight)
+        if (element.scrollHeight === element.clientHeight){
+            if(this.state.scroll !== null){
+            this.setState({scroll: null })
+            }
+        }else if(element.scrollTop === 0){
+            if(this.state.scroll !== classes.scrollTop){
+                this.setState({scroll: classes.scrollTop })
+            }
+        }else if(Math.round(element.scrollHeight - element.scrollTop) === element.clientHeight){
+            if(this.state.scroll !== classes.scrollBottom){
+                this.setState({scroll: classes.scrollBottom })
+            }
+        }else if(element.clientHeight ){
+            if(this.state.scroll !== classes.scrollMiddle){
+                this.setState({scroll: classes.scrollMiddle })
+            }
+        }
     }
 
  
@@ -88,19 +102,23 @@ class Checkout extends Component{
             for (let order in this.state.orders){
                 tPrice += this.state.orders[order].order.price
             }
-            console.log('tpirce', tPrice)
             return tPrice.toFixed(2)
         }
     }
 
     render(){
+        let vh = window.innerHeight * 0.01;
+        //console.log('[vh]', vh)
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        console.log()
-        
+        window.addEventListener('resize', () => {
+            let vh = window.innerHeight * 0.01
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        })
         const lprint = this.printOrders()
         return (
             <>
-                <div id="elements" onScroll={this.handleScroll} className={`${this.state.scroll} ${classes.orders}`}>
+                <div id="orderList" onScroll={this.handleScroll} className={`${this.state.scroll} ${classes.orders}`}>
                     {lprint}
                 </div>
                 <TotalCard 

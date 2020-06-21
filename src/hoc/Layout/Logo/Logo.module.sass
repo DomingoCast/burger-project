@@ -1,15 +1,23 @@
 .marco
-    width: 6rem
-    height: 6rem
+    width: 10rem
+    height: var(--toolbar-height)
     overflow: hidden
     //align-self: center
     position: absolute
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
+    display: flex
+    justify-content: center
+    align-items: center
     
     
 .mascarilla
     width: 10rem
-    margin-left: -2.5rem
+    padding-bottom: .4rem
+    //margin-left: -2.5rem
 
+@media screen and (max-width: 28rem)
+    .marco 
+        right: 5rem
+        left: 90%
