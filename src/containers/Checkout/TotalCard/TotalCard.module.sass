@@ -3,12 +3,10 @@
     width: 90%
     align-items: center
     position: fixed
-    bottom: 0rem
+    bottom: 9rem
 
     //border: 3px solid red
-    padding-bottom: 9rem
     background: white
-    padding-top: 3rem
 
 
 .order
@@ -44,11 +42,14 @@
 .burgers
     width: 60%
     justify-content: space-between
+    font-weight: 400
+    padding-top: 1rem
 
 .x
     text-transform: lowercase
 
 .buttons
+    padding-top: 1rem
     display: block
 
 //@mixin responsive-box($height)
@@ -57,3 +58,65 @@
     //content: ''
     //display: block
     //padding-top: $height
+@media screen and (max-width: 70em)
+    .higherOrder
+        left: 50%
+        transform: translateX(-50%)
+        bottom: 2rem
+    .order
+        flex-flow: column
+        align-items: center
+    .burgers
+        text-align: center
+
+@media screen and (max-width: 45em)
+    .order
+        width: 45rem
+        margin: auto
+        height: 12rem
+        padding: 0
+    .price
+        display: none
+    .burgers
+        margin-top: 1rem
+    .buttons
+        transform: scale(.9)
+        width: 100%
+        margin: auto
+        margin-bottom: 1rem
+    .higherOrder
+        bottom: 1rem
+@media screen and (max-width: 37em)
+    .ingredients
+        display: none
+    .burgerContainer
+        margin-top: 2rem
+        margin-bottom: 4rem
+        transform: scale(2)
+    .textPrice
+        font-weight: 400
+        font-size: 2.5rem
+        letter-spacing: .3rem
+
+    .buttons
+        transform: scale(.8)
+
+@media screen and (max-width: 28rem)
+    .burgers
+        width: auto
+        position: relative
+    .x
+        position: absolute
+        bottom: -.3rem
+        right: -2rem
+        font-weight: 100
+        font-size: 1.5rem
+        letter-spacing: .3rem
+        color: #5E5E5E
+
+@media screen and (max-width: 27em)
+    .higherOrder
+        width: 95%
+    .order
+        width: 100%
+

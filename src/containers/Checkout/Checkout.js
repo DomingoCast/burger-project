@@ -10,7 +10,8 @@ import * as types from '../../store/types'
 class Checkout extends Component{
     _isMounted = false
     state = {
-        orders: null
+        orders: null,
+        scroll: null
     }
 
     componentDidMount(){
@@ -21,7 +22,11 @@ class Checkout extends Component{
                     this.setState({orders: response.data?response.data:null})}
                 })
             .catch(error => console.log('error', error))
+        
+        const elements = document.querySelector('#elements')
+
     }
+
     componentWillMount(){
         this._isMounted = false
     }
@@ -40,7 +45,7 @@ class Checkout extends Component{
         return orders
     }
 
-    handleEdit = (order, orderID) => { //Cambiar cuando redux porque esto es una locura
+    handleEdit = (order, orderID) => { //Cambiar cuando redux porque esto e:s una locura
         console.log(order)
         this.props.setCurrent(order.ingredients, order.order.price)
         this.handleDelete(orderID)
@@ -61,6 +66,20 @@ class Checkout extends Component{
     }
     handleAdd = () => this.props.history.push('/burger')
     handleContinue = () => this.props.history.push('/form')
+    
+    handleScroll = (element) => {
+        //let scrollClass
+        //if (element.scrollHeight === element.clientHeight){
+            //return null
+        //}else if(element.scrollTop === 0){
+            //return classes.scrollTop
+        //}else if(element.scrollHeight - element.scrollTop === element.clientHeight){
+            //return classes.scrollBottom
+        //}else{
+            //return classes.scrollMiddle
+        //}
+    }
+
  
 
     totalPrice = () => {
@@ -70,16 +89,18 @@ class Checkout extends Component{
                 tPrice += this.state.orders[order].order.price
             }
             console.log('tpirce', tPrice)
-            return tPrice
+            return tPrice.toFixed(2)
         }
     }
 
     render(){
+
+        console.log()
         
         const lprint = this.printOrders()
         return (
             <>
-                <div className={classes.orders}>
+                <div id="elements" onScroll={this.handleScroll} className={`${this.state.scroll} ${classes.orders}`}>
                     {lprint}
                 </div>
                 <TotalCard 

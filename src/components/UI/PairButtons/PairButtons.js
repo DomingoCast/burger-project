@@ -47,11 +47,18 @@ const pairButtons = (props) => {
             )
             break
     }
+    const style = {
+        fontWeight: "400",
+        fontSize: "2.5rem",
+        letterSpacing: ".3rem",
+
+    }
     
     
     return(
         <div className={classes.container}>
             {btn1}
+            <span sytle={style}className={classes.children}>{props.children}</span>
             {btn2}
         </div>
 

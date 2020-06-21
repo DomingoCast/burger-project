@@ -9,12 +9,14 @@ const checkoutOrder = (props) =>{
         <div className={classes.higherOrder}>
             <div className={classes.order}>
                 <div className={classes.burgers}>
-                    Burgers <span className={classes.x}>x</span>{props.quantity}
+                    Burgers <span className={classes.x}>x{props.quantity}</span>
                 </div>
                 <div className={classes.buttons}>
                     <PairButtons url1="#" btn1="add" click1={props.add}
                                  url2="#" btn2="continue" click2={props.continue}
-                    />
+                    >
+                        <span className={classes.textPrice}>${props.tPrice}</span>
+                    </PairButtons>
                 </div>
             </div>
                 <div className={classes.price}>

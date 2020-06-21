@@ -3,6 +3,7 @@
     width: 90%
     align-items: center
     margin-bottom: 3rem
+
 .order
     background: #FFF7E2
     padding: 1rem 8rem
@@ -14,6 +15,8 @@
     margin-left: auto
     margin-right: 0
 
+
+    
 .price
     display: block
     //width: 16rem
@@ -29,6 +32,7 @@
     vertical-align: middle
 
 .ingredients
+    text-align: center
     width: 60%
     display: flex
     justify-content: space-between
@@ -37,6 +41,7 @@
     font-size: 2.5rem
     letter-spacing: .7rem
     display: block
+    margin: 0 1rem
 .x
     text-transform: lowercase
 
@@ -76,3 +81,55 @@
     //.Burger
         //width: 90vw
         //height: 72vw
+@media screen and (max-width: 70em)
+    .higherOrder
+        margin: auto
+        margin-bottom: 2rem
+    .order
+        flex-flow: column
+        align-items: center
+    .ingredients
+        width: 100% 
+        margin: 1rem 0
+        justify-content: center
+    .burgerContainer
+        transform: scale(1.3)
+
+@media screen and (max-width: 45em)
+    .order
+        width: 45rem
+        margin: auto
+        padding-left: 2rem
+        padding-right: 2rem
+    .price
+        display: none
+    .burgerContainer
+        transform: scale(1.7)
+    .buttons
+        transform: scale(.9)
+        width: 100%
+        margin: auto
+        margin-bottom: 1rem
+@media screen and (max-width: 37em)
+    .ingredients
+        display: none
+    .burgerContainer
+        margin-top: 2rem
+        margin-bottom: 4rem
+        transform: scale(2)
+    .textPrice
+        font-weight: 400
+        font-size: 2.5rem
+        letter-spacing: .3rem
+
+    .buttons
+        transform: scale(.8)
+
+@media screen and (max-width: 27em)
+    .higherOrder
+        width: 95%
+        margin-bottom: 1rem
+        margin-top: 0
+    .order
+        width: 100%
+

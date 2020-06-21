@@ -1,7 +1,6 @@
 .container
     display: flex
     width: 12rem
-    background: white
 .link
     display: block
     width: 50%
@@ -61,3 +60,21 @@
 
         font-size: 3.5rem
         font-weight: 400
+
+.children
+    display: none
+
+@media screen and (max-width: 45em)
+    .container
+        width: 100%
+        justify-content: space-between
+        align-items: center
+    .link
+        width: 6rem
+    .children
+        display: inline-block
+        font-weight: 400
+        font-size: 2.5rem
+        letter-spacing: .3rem
+
+

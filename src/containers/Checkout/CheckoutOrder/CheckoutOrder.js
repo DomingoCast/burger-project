@@ -15,6 +15,12 @@ const checkoutOrder = (props) =>{
     }else{
         ingredients = <p>hola</p>
     }
+    const style = {
+        fontWeight: "400",
+        fontSize: "2.5rem",
+        letterSpacing: ".3rem",
+
+    }
         
     //return <p> adios </p>
     return (
@@ -29,7 +35,9 @@ const checkoutOrder = (props) =>{
                 <div className={classes.buttons}>
                     <PairButtons url1="#"  btn1="edit"   click1={props.edit}
                                  url2="#"  btn2="remove" click2={props.delete}
-                    />
+                    >
+                        <span style={style} className={classes.textPrice}>${props.price}</span>
+                    </PairButtons>
                 </div>
             </div>
                 <div className={classes.price}>
