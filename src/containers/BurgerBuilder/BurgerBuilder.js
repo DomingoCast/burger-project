@@ -1,4 +1,11 @@
 import React, {Component} from 'react'
+
+import {withRouter, Redirect} from 'react-router-dom'
+import { connect, dispatch } from 'react-redux'
+
+import * as types from '../../store/types'
+import axios from '../../axios-orders'
+
 import Aux from '../../hoc/Aux/Aux'
 import Burger from '../../components/Burger/Burger'
 import TotalCost from '../../components/Burger/TotalCost/TotalCost'
@@ -8,12 +15,7 @@ import Loading from '../../components/UI/Loading/Loading'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import CheckoutText from '../../components/Burger/CheckoutText/CheckoutText'
 import classes from './BurgerBuilder.module.sass'
-import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-import {withRouter, Redirect} from 'react-router-dom'
-
-import { connect, dispatch } from 'react-redux'
-import * as types from '../../store/types'
 
 class BurgerBuilder extends Component{
 _isMounted = false

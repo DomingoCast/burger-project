@@ -12,6 +12,10 @@ const initialState = {
             cheese: false,
             meat: false,
         }
+    },
+    orderState: {
+        totalPrice: null,
+        quantity: null,
     }
 }
 
@@ -37,6 +41,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 initialState,
             }
+        case 'ADD_ORDER':
+            return{
+                ...state,
+                orderState: action.orderState,
+
+            }
+
     }
     return state
 }

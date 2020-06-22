@@ -68,8 +68,18 @@ class Checkout extends Component{
             })
             .catch(err => console.log('edit err', err))
     }
+
     handleAdd = () => this.props.history.push('/burger')
-    handleContinue = () => this.props.history.push('/form')
+
+    handleContinue = () => {
+        this.props.history.push('/form')
+        let newOrder = {
+            quantity: Object.keys(this.state.orders).length,
+            totalPrice: this.totalPrice()
+        }
+        console.log('[NEW ORDER]', newOrder)
+        this.props.addOrder(newOrder)
+    }
     
     handleScroll = () => {
         const element = document.querySelector('#orderList')
@@ -118,8 +128,10 @@ class Checkout extends Component{
         const lprint = this.printOrders()
         return (
             <>
-                <div id="orderList" onScroll={this.handleScroll} className={`${this.state.scroll} ${classes.orders}`}>
-                    {lprint}
+                <div className={classes.ordersContainer}>
+                    <div id="orderList" onScroll={this.handleScroll} className={`${this.state.scroll} ${classes.orders}`}>
+                        {lprint}
+                    </div>
                 </div>
                 <TotalCard 
                     quantity={this.state.orders?Object.keys(this.state.orders).length:null}
@@ -140,7 +152,8 @@ class Checkout extends Component{
 const mapActions = (dispatch) => {
     return{
         setCurrent: (ingredients, totalCost) => dispatch({type: types.SET_CURRENT, 
-                                                data: {ingredients: ingredients, totalCost: totalCost}})
+                                                data: {ingredients: ingredients, totalCost: totalCost}}),
+        addOrder: (orderState) => dispatch({type: types.ADD_ORDER, orderState: orderState}),
     }
 }
 

@@ -15,33 +15,23 @@
     //height: -webkit-calc(50% - 50rem)
     //position: relative
     box-sizing: border-box
-    border-top: 3px solid rgba(#C4C4C4, 0)
-    border-bottom: 3px solid rgba(#C4C4C4, 0)
-    transition: all .2s
-    //&::before:
-        //content: ""
-        //position: absolute
-        //top: 0
-        //left: 50%
-        //transform: translate(-50%)
-        //width: 100%
 
+
+.border
+    &__1
+        .scrollTop
+            border-bottom: 3px solid #C4C4C4
+    &__2
+        .scrollBottom
+            border-top: 3px solid #C4C4C4
 .scrollTop
     border-bottom: 3px solid #C4C4C4
-.scrollBottom
-    border-top: 3px solid #C4C4C4
+      .scrollBottom
+          border-top: 3px solid #C4C4C4
 .scrollMiddle
     border-top: 3px solid #C4C4C4
     border-bottom: 3px solid #C4C4C4
 
-//.border
-    //&__1
-        //width: 100%
-        //border-top: 0
-
-    //&__2
-        //width: 100%
-        //border-bottom: 0
 
 
 

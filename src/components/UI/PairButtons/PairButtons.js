@@ -25,12 +25,30 @@ const pairButtons = (props) => {
                 </Link>
             )
             break
+        case 'back':
+            btn1 = (
+                <Link style={{textDecoration: 'none'}} onClick={props.click1} className={classes.link} to={props.url1}>
+                    <div className={`${classes.btn} ${classes.btn__back}`}>
+                        <span className={classes.btn__text}>&larr;</span>
+                    </div>
+                </Link>
+            )
+            break
     }
     switch(props.btn2){
         case 'continue':
             btn2 = (
                 <Link style={{textDecoration: 'none'}} onClick={props.click2} className={classes.link} to={props.url2}>
                     <div className={`${classes.btn} ${classes.btn__continue}`}>
+                        <span className={classes.btn__text}>&rarr;</span>
+                    </div>
+                </Link>
+            )
+            break
+        case 'continue2':
+            btn2 = (
+                <Link style={{textDecoration: 'none'}} onClick={props.click2} className={classes.link} to={props.url2}>
+                    <div className={`${classes.btn} ${classes.btn__continue} ${classes.btn__continue__2}`}>
                         <span className={classes.btn__text}>&rarr;</span>
                     </div>
                 </Link>
