@@ -5,6 +5,7 @@ class  Input extends Component{
     state = {
         parentClass: ` ${classes.inputBox}` ,
         invalidClass: ` ${classes.invalid}`,
+        focusedClass: null
     }
      focused = () => {
         this.setState({parentClass: `${classes.inputBox} ${classes.focusedAdress}`})
@@ -44,6 +45,12 @@ class  Input extends Component{
         }
 
     }
+    handleFocus = () => {
+        this.setState({
+            //focusedClass: classes.focused,
+            parentClass:` ${classes.inputBox} ${classes.focused}`
+            })
+    }
 
     render(){
         let inputC
@@ -51,9 +58,11 @@ class  Input extends Component{
             case "name":
                 inputC = (
                     <>
-                        <div className={this.state.parentClass}>
-                            <input type="text" id="nameIn" onBlur={this.validateName} className={classes.input}/>
-                            <div className={classes.inputBack}></div>
+                        <div className={`${this.state.focusedClass} ${this.state.parentClass}`}>
+                            <div className={classes.backed}>
+                                <input type="text" id="nameIn" onBlur={this.validateName} onFocus={this.handleFocus}className={classes.input}/>
+                                <div className={classes.inputBack}></div>
+                            </div>
                             <label for="nameIn" className={classes.label}>Name<div className={classes.label__background}></div></label>
                         </div>
 
@@ -64,8 +73,10 @@ class  Input extends Component{
                 inputC = (
                     <>
                         <div className={this.state.parentClass}>
-                            <input type="email" id="emailIn" onBlur={this.validateEmail} className={classes.input}/>
-                            <div className={classes.inputBack}></div>
+                            <div className={classes.backed}>
+                                <input type="email" id="emailIn" onFocus={this.handleFocus} onBlur={this.validateEmail} className={classes.input}/>
+                                <div className={classes.inputBack}></div>
+                            </div>
                             <label for="emailIn" className={classes.label}>Email<div className={classes.label__background}></div></label>
                         </div>
                     </>
@@ -76,11 +87,13 @@ class  Input extends Component{
                 inputC = (
                     <>
                         <div className={this.state.parentClass}>
-                            <div className={classes.adressContainer}>
-                                <input type="text" onFocus={this.focused} onBlur={this.validateAdress} id="adressIn" className={`${classes.input} ${classes.adress}`}/>
-                                <input type="text"  onFocus={this.focused} onBlur={this.validateZip} id="zipIn" placeholder="zip" className={`${classes.input} ${classes.zip}`}/>
+                            <div className={classes.backed}>
+                                <div className={classes.adressContainer}>
+                                    <input type="text" onFocus={this.focused} onBlur={this.validateAdress} id="adressIn" className={`${classes.input} ${classes.adress}`}/>
+                                    <input type="text"  onFocus={this.focused} onBlur={this.validateZip} id="zipIn" placeholder="zip" className={`${classes.input} ${classes.zip}`}/>
+                                </div>
+                                <div className={classes.inputBack}></div>
                             </div>
-                            <div className={classes.inputBack}></div>
                             <label for="adressIn" className={classes.label}>Adress<div className={classes.label__background}></div></label>
                         </div>
 
@@ -90,9 +103,11 @@ class  Input extends Component{
             case "card":
                 inputC = (
                     <>
-                        <div className={classes.inputBox}>
-                            <input type="text" id="cardIn" onBlur={this.validateCard}className={classes.input}/>
-                            <div className={classes.inputBack}></div>
+                        <div className={this.state.parentClass}>
+                            <div className={classes.backed}>
+                                <input type="text" id="cardIn" onFocus={this.handleFocus} onBlur={this.validateCard} className={classes.input}/>
+                                <div className={classes.inputBack}></div>
+                            </div>
                             <label for="cardIn" className={classes.label}>Card<div className={classes.label__background}></div></label>
                         </div>
                     </>

@@ -20,10 +20,17 @@
     justify-content: space-between
     align-items: center
 
+.backed
+    width: 80%
+    height: 3.5rem
+    position: relative
+    display: flex
+    align-items: center
+
 
 
 .adressContainer
-    width: 80%
+    width: 100%
     display: flex
     height: 100%
     justify-content: space-between
@@ -35,7 +42,7 @@
 .input
     border: none
     height: 100%
-    width: 80%
+    width: 100%
     padding: 0 1rem
     box-sizing: border-box
     font-size: 1.6rem
@@ -43,16 +50,31 @@
     letter-spacing: .1rem
     &:focus
         outline: none
-    &:focus ~ .inputBack
+    //&:focus ~ .inputBack
+        //opacity: 1
+        //background: #98B923
+
+    //&:focus ~ .label
+        //font-weight: 500
+        //color: #E8F6CA
+    //&:focus ~ .label .label__background
+        //opacity: 1
+        //background: #98B923
+
+.focused
+    //.input
+        //outline: none
+    .inputBack
         opacity: 1
         background: #98B923
 
-    &:focus ~ .label
+    .label
         font-weight: 500
         color: #E8F6CA
-    &:focus ~ .label .label__background
+    .label__background
         opacity: 1
         background: #98B923
+    
 
     //&:focus:invalid ~ .inputBack
         //opacity: 1
@@ -113,7 +135,7 @@
     position: absolute
     top: .7rem
     left: .7rem
-    width: 80%
+    width: 100%
     height: 100%
     opacity: 0
 
@@ -130,4 +152,37 @@
         z-index: -1
         left: 0.3rem
         opacity: 0
+
+
+
+@media screen and (max-width: 54em)
+    .label
+        margin-bottom: 1.5rem
+        margin-top: 2rem
+    .inputBox
+        display: flex
+        flex-flow: column-reverse
+        align-items: flex-start
+    .backed
+        width: 100%
+    .inputContainer:last-child
+        flex-grow: 1
+        .backed
+            flex-grow: 1
+@media screen and (max-width: 45em)
+    .label
+        top: 0
+        left: 0
+
+@media screen and (max-width: 37em)
+  .label
+      display: block
+
+@media screen and (max-width: 28rem)
+  .label
+      display: block
+
+@media screen and (max-width: 27em)
+  .label
+      display: block
 
